@@ -1,0 +1,67 @@
+#include <SoftwareSerial.h>
+
+SoftwareSerial bluetoothSerial(2, 3); // RX, TX 핀을 지정
+
+void setup() {
+  Serial.begin(9600);
+  bluetoothSerial.begin(9600); // 블루투스 모듈과의 시리얼 통신을 초기화
+}
+
+void loop() {
+  if (bluetoothSerial.available()) {
+    char receivedChar = bluetoothSerial.read();
+    Serial.print("Received: ");
+    Serial.println(receivedChar);
+
+    // 블루투스로 받은 데이터를 다시 보내기
+    bluetoothSerial.write(receivedChar);
+  }
+}
+
+
+
+
+
+
+#include <SoftwareSerial.h>
+
+SoftwareSerial bluetoothSerial(2, 3); // RX, TX 핀을 지정
+
+void setup() {
+  // 시리얼 통신을 시작하고, 통신 속도를 9600bps로 설정합니다.
+  Serial.begin(9600);
+  bluetoothSerial.begin(9600); 
+}
+
+void loop() {
+  // 시리얼 통신을 통해 데이터가 도착했는지 확인합니다.
+  if (bluetoothSerial.available() > 0) {
+    // 도착한 데이터를 읽어와서 출력합니다.
+    String message = bluetoothSerial.readString();
+    Serial.println(message);
+  }
+}
+
+
+
+
+
+python 데이터 보내기
+
+import serial
+
+# 시리얼 포트와 통신 속도를 알맞게 설정합니다.
+serial_port = 'COM7'  # 사용하는 시리얼 포트로 변경해 주세요.
+baud_rate = 9600  # 통신 속도를 필요에 맞게 변경해 주세요.
+
+# 시리얼 포트 객체를 생성합니다.
+ser = serial.Serial(serial_port, baud_rate)
+
+# 데이터를 보낼 메시지를 작성합니다.
+message = "ㅅㅂ이현대대머리"
+
+# 데이터를 시리얼 포트로 전송합니다.6
+ser.write(message.encode())
+
+# 시리얼 포트를 닫습니다.
+ser.close()

@@ -1,1 +1,2 @@
-# VoiskVo
+# Stunner-kiosk
+ 
